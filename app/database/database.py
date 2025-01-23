@@ -3,7 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 # URL de la BD
-SQLALCHEMY_DATABASE_URL = "mysql+mysqlconnector://freedb_at_root:w%VzmyJq#SkfyK3@sql.freedb.tech:3306/freedb_as_app"
+SQLALCHEMY_DATABASE_URL = "mysql+mysqlconnector://freedb_AT_Root:RR5xHVqx2J#uVN?@sql.freedb.tech:3306/freedb_PruebasAndroid"
 # Motor de conexion de la bd
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 # Crea el generador de sesiones de la BD

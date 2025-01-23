@@ -7,7 +7,7 @@ class User(Base):
     __tablename__="user"
     email = Column(VARCHAR(255), primary_key=True)
     username = Column(VARCHAR(255), unique=True)
-    passwd = Column(VARCHAR(255))
+    passwd = Column("pass",VARCHAR(255))
     image = Column(VARCHAR(255))
 
 # CREATE TABLE `user` (
