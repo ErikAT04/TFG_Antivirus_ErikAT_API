@@ -19,7 +19,7 @@ def get_user_by_email_or_username(string:str, db:Session = Depends(get_db)):
     else:
         raise Exception("Error: Usuario no encontrado")
     
-@router.post("/create")
+@router.post("/insert")
 def create_user(user:Schemas.User, db:Session = Depends(get_db)):
     usuario = models.User()
     usuario.email = user.email
@@ -30,7 +30,7 @@ def create_user(user:Schemas.User, db:Session = Depends(get_db)):
     db.commit()
     return usuario
 
-@router.put("/{email}/actualizar")
+@router.put("/{email}/update")
 def update_user(email:str, user:Schemas.User, db:Session = Depends(get_db)):
     usuario = db.query(models.User).filter(models.User.email == email).first()
     if usuario:
@@ -43,7 +43,7 @@ def update_user(email:str, user:Schemas.User, db:Session = Depends(get_db)):
     else:
         raise Exception("Usuario no encontrado")
 
-@router.delete("/{email}/delete")
+@router.delete("/{email}/remove")
 def delete_user(email:str, db:Session = Depends(get_db)):
     usuario = db.query(models.User).filter(models.User.email == email).first()
     if usuario:
