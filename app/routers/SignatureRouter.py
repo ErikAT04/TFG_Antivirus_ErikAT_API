@@ -1,10 +1,10 @@
 from fastapi import APIRouter
-from models.Signature import Signature
+from app.repository.Schemas import Signature
 
 router = APIRouter(prefix="/api/signatures")
 
 @router.get("/")
-def getAllSigs():
+def get_all_signatures():
     sigList = []
     with open("files/virusDef.txt", "r") as file:
         for line in file.readlines():
