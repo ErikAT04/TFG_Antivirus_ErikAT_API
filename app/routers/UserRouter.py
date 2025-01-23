@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends
 from app.repository import Schemas
 from sqlalchemy.orm import Session
+from sqlalchemy import or_
 from app.database.database import get_db
 from app.database import models
 
@@ -13,7 +14,7 @@ def get_all_users(db:Session = Depends(get_db)):
 
 @router.get("/{string}")
 def get_user_by_email_or_username(string:str, db:Session = Depends(get_db)):
-    user = db.query(models.User).filter(models.User.email == string or models.User.username == string).first()
+    user = db.query(models.User).filter(or_(models.User.email == string, models.User.username == string)).first()
     if user:
         return user
     else:
