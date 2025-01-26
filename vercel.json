@@ -5,9 +5,10 @@
             "use": "@vercel/python"
         }
     ],
-    "rewrites": [],
-    "redirects": [],
-    "headers": [],
-    "cleanUrls": true,
-    "trailingSlash": false
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "main.py"
+        }
+    ]
 }
