@@ -5,12 +5,9 @@
             "use": "@vercel/python"
         }
     ],
-    "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "main.py"
-        }
-    ],
     "rewrites": [],
-    "redirects": []
+    "redirects": [],
+    "headers": [],
+    "cleanUrls": true,
+    "trailingSlash": false
 }
