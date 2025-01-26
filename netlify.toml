@@ -1,0 +1,7 @@
+[build]
+  functions = "functions"  # Directorio donde estarán las funciones serverless
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api"
+  status = 200
