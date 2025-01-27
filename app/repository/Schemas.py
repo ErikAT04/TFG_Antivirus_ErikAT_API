@@ -27,7 +27,7 @@ class Device(BaseModel):
     dev_type:str
     last_scan:datetime
     join_in:datetime
-    user:str
+    user:Optional[str]
 
 # CREATE TABLE `device` (
 #   `id` varchar(255) NOT NULL,

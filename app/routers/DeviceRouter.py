@@ -3,11 +3,12 @@ from app.repository import Schemas
 from sqlalchemy.orm import Session
 from app.database.database import get_db
 from app.database import models
+from app.auth import auth
 
-router = APIRouter(prefix="/api/devices")
+router = APIRouter(prefix="/api/devices", tags=["Devices"])
 
 @router.get("/")
-def get_all_devices(db:Session = Depends(get_db)):
+def get_all_devices(db:Session = Depends(get_db), token:str = Depends(auth.oauth2_scheme)):
     devList = db.query(models.Device).all()
     return devList
 
@@ -20,7 +21,7 @@ def get_devices_by_id(id:str, db:Session = Depends(get_db)):
         raise Exception("Dispositivo no encontrado")
     
 @router.post("/insert")
-def insert_device(device:Schemas.Device, db:Session = Depends(get_db)):
+def insert_device(device:Schemas.Device, db:Session = Depends(get_db) ):
     dev = models.Device()
     dev.dev_name = device.dev_name
     dev.id = device.id
@@ -33,7 +34,7 @@ def insert_device(device:Schemas.Device, db:Session = Depends(get_db)):
     return dev
 
 @router.put("/{id}/update")
-def update_device(id:str, device:Schemas.Device, db:Session = Depends(get_db)):
+def update_device(id:str, device:Schemas.Device, db:Session = Depends(get_db), token:str = Depends(auth.oauth2_scheme)):
     dev = db.query(models.Device).filter(models.Device.id == id).first()
     if dev:
         dev.dev_name = device.dev_name
@@ -48,7 +49,7 @@ def update_device(id:str, device:Schemas.Device, db:Session = Depends(get_db)):
         raise Exception("Dispositivo no encontrado")
     
 @router.put("/{id}/remove")
-def delete_device(id:str, db:Session = Depends(get_db)):
+def delete_device(id:str, db:Session = Depends(get_db), token:str = Depends(auth.oauth2_scheme)):
     dev = db.query(models.Device).filter(models.Device.id == id).first()
     if dev:
         db.delete(dev)

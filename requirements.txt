@@ -2,4 +2,6 @@ fastapi
 uvicorn
 mysql-connector-python
 SQLAlchemy
-mangum
+pyjwt
+python-jose[cryptography]
+python-multipart

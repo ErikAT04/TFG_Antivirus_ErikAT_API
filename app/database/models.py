@@ -7,7 +7,7 @@ class User(Base):
     __tablename__="user"
     email = Column(VARCHAR(255), primary_key=True)
     username = Column(VARCHAR(255), unique=True)
-    passwd = Column("pass",VARCHAR(255))
+    passwd = Column("passwd",VARCHAR(255))
     image = Column(VARCHAR(255))
 
 # CREATE TABLE `user` (
@@ -25,7 +25,7 @@ class Device(Base):
     dev_type = Column(VARCHAR(255))
     last_scan = Column(DateTime)
     join_in = Column(DateTime)
-    user = Column(VARCHAR(255), ForeignKey("user.id"))
+    user = Column(VARCHAR(255), ForeignKey("user.email"))
 
 # CREATE TABLE `device` (
 #   `id` varchar(255) NOT NULL,
@@ -38,3 +38,9 @@ class Device(Base):
 #   KEY `user` (`user`),
 #   CONSTRAINT `device_ibfk_1` FOREIGN KEY (`user`) REFERENCES `user` (`email`)
 # ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+class Signature(Base):
+    __tablename__="signature"
+    signature = Column(VARCHAR(255), primary_key=True)
+    type = Column(VARCHAR(255))
+    extendedType:str = Column(VARCHAR(255))

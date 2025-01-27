@@ -4,11 +4,12 @@ from sqlalchemy.orm import Session
 from sqlalchemy import or_
 from app.database.database import get_db
 from app.database import models
+from app.auth import auth
 
-router = APIRouter(prefix="/api/users")
+router = APIRouter(prefix="/api/users", tags=["Users"])
 
 @router.get("/")
-def get_all_users(db:Session = Depends(get_db)):
+def get_all_users(db:Session = Depends(get_db), token:str = Depends(auth.oauth2_scheme)):
     users = db.query(models.User).all()
     return users
 
@@ -21,7 +22,7 @@ def get_user_by_email_or_username(string:str, db:Session = Depends(get_db)):
         raise Exception("Error: Usuario no encontrado")
     
 @router.post("/insert")
-def create_user(user:Schemas.User, db:Session = Depends(get_db)):
+def create_user(user:Schemas.User, db:Session = Depends(get_db), token:str = Depends(auth.oauth2_scheme)):
     usuario = models.User()
     usuario.email = user.email
     usuario.username = user.username
@@ -32,7 +33,7 @@ def create_user(user:Schemas.User, db:Session = Depends(get_db)):
     return usuario
 
 @router.put("/{email}/update")
-def update_user(email:str, user:Schemas.User, db:Session = Depends(get_db)):
+def update_user(email:str, user:Schemas.User, db:Session = Depends(get_db), token:str = Depends(auth.oauth2_scheme)):
     usuario = db.query(models.User).filter(models.User.email == email).first()
     if usuario:
         usuario.email = user.email
@@ -45,7 +46,7 @@ def update_user(email:str, user:Schemas.User, db:Session = Depends(get_db)):
         raise Exception("Usuario no encontrado")
 
 @router.delete("/{email}/remove")
-def delete_user(email:str, db:Session = Depends(get_db)):
+def delete_user(email:str, db:Session = Depends(get_db), token:str = Depends(auth.oauth2_scheme)):
     usuario = db.query(models.User).filter(models.User.email == email).first()
     if usuario:
         db.delete(usuario)

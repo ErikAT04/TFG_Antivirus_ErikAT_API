@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from app.repository.Schemas import Signature
 
-router = APIRouter(prefix="/api/signatures")
+router = APIRouter(prefix="/api/signatures", tags=["Signatures"])
 
 @router.get("/")
 def get_all_signatures():
