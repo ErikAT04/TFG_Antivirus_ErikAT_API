@@ -22,7 +22,7 @@ def get_user_by_email_or_username(string:str, db:Session = Depends(get_db)):
         raise Exception("Error: Usuario no encontrado")
     
 @router.post("/insert")
-def create_user(user:Schemas.User, db:Session = Depends(get_db), token:str = Depends(auth.oauth2_scheme)):
+def create_user(user:Schemas.User, db:Session = Depends(get_db)):
     usuario = models.User()
     usuario.email = user.email
     usuario.username = user.username

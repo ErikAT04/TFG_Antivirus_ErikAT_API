@@ -43,4 +43,4 @@ class Signature(Base):
     __tablename__="signature"
     signature = Column(VARCHAR(255), primary_key=True)
     type = Column(VARCHAR(255))
-    extendedType:str = Column(VARCHAR(255))
+    extended_type = Column(VARCHAR(255))

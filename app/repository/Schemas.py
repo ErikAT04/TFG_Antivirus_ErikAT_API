@@ -5,7 +5,7 @@ from datetime import datetime
 class Signature(BaseModel):
     signature:str
     type:str
-    extendedType:str
+    extended_type:str
 
 class User(BaseModel):
     email:str
@@ -27,7 +27,7 @@ class Device(BaseModel):
     dev_type:str
     last_scan:datetime
     join_in:datetime
-    user:Optional[str]
+    user:Optional[str] = None
 
 # CREATE TABLE `device` (
 #   `id` varchar(255) NOT NULL,

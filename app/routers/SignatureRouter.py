@@ -1,13 +1,10 @@
-from fastapi import APIRouter
-from app.repository.Schemas import Signature
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
+from app.database.models import Signature
+from app.database.database import get_db
 
 router = APIRouter(prefix="/api/signatures", tags=["Signatures"])
 
 @router.get("/")
-def get_all_signatures():
-    sigList = []
-    with open("app/files/virusDef.txt", "r") as file:
-        for line in file.readlines():
-            auxList = line.split("|")
-            sigList.append(Signature(signature=auxList[1], extendedType=auxList[2], type=auxList[3]))
-    return sigList
+def get_all_signatures(db:Session = Depends(get_db)):
+    return db.query(Signature).all()

@@ -1037,4 +1037,4 @@ INSERT INTO signature(signature, type, extended_type) VALUES ('0c8e23cef9baf33d3
 INSERT INTO signature(signature, type, extended_type) VALUES ('0e3e13292540b823c8cabfa7c326711f', 'TROJAN', 'W32.Clod3a0.Trojan.d8d9');
 INSERT INTO signature(signature, type, extended_type) VALUES ('0a8b44bf42d642b9db5861fc3ab4317c', 'TROJAN', 'W32.Cloda88.Trojan.97a7');
 INSERT INTO signature(signature, type, extended_type) VALUES ('0f5b5482e857019263360725ac7a51e6', 'TROJAN', 'W32.Clod003.Trojan.ca80');
-INSERT INTO signature(signature, type, extended_type) VALUES ('d501194c987486789bb01b50dc1a0adb', 'TRIAL', 'PruebaVirus');
+INSERT INTO signature(signature, type, extended_type) VALUES ('f822102f4515609fc31927a84c6db7f8', 'TRIAL', 'PruebaVirus');

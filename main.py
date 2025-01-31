@@ -4,7 +4,6 @@ from app.routers import SignatureRouter
 from app.routers import UserRouter
 from app.routers import DeviceRouter
 from app.auth import auth
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 
 app = FastAPI()
 app.include_router(SignatureRouter.router)

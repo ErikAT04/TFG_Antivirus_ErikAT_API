@@ -11,19 +11,22 @@ from fastapi import APIRouter, Depends
 router = APIRouter(prefix="/api", tags=["Token Control"])
 
 oauth2_scheme = OAuth2PasswordBearer("/api/token")
+
+@router.post("/token") # /api/token
+def login(form_data: OAuth2PasswordRequestForm = Depends(), db:Session = Depends(get_db)):
+    [...]
 SECRET_KEY = "Clave_Magik_AV"
 ALGORITHM = "HS256"
 
-def cerate_token(data: dict):
-    to_encode = data.copy()
-    token = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+def create_token(data: dict):
+    token = jwt.encode(data, SECRET_KEY, algorithm=ALGORITHM)
     return token
 
 @router.post("/token")
 def login(form_data: OAuth2PasswordRequestForm = Depends(), db:Session = Depends(get_db)):
     user = db.query(User).filter(and_(User.email == form_data.username, User.passwd == hashlib.sha256(form_data.password.encode()).hexdigest())).first()
     if user:
-        token = cerate_token(data={"sub":user.email})
+        token = create_token(data={"sub":user.email})
         return {
             "access_token": token,
             "token_type":"bearer"
