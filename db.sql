@@ -1,42 +1,3 @@
-DROP DATABASE IF EXISTS m_antivirus_db;
-CREATE DATABASE m_antivirus_db;
-USE m_antivirus_db;
-
-CREATE TABLE `user` (
-  `email` varchar(255) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `passwd` varchar(255) NOT NULL,
-  `image` varchar(255) DEFAULT "https://i.discogs.com/_kK2FFfyrhNnbdTjCGMqfy_2gsMw120aUhKTb3M9kyE/rs:fit/g:sm/q:40/h:300/w:300/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMTk5/NTg3LTE1NDk4MTEy/MjMtNTczMC5qcGVn.jpeg",
-  PRIMARY KEY (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-CREATE TABLE `device` (
-  `id` varchar(255) NOT NULL,
-  `dev_name` varchar(255) DEFAULT NULL,
-  `dev_type` varchar(255) DEFAULT NULL,
-  `last_scan` datetime DEFAULT NULL,
-  `join_in` datetime DEFAULT NULL,
-  `user` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user` (`user`),
-  CONSTRAINT `device_ibfk_1` FOREIGN KEY (`user`) REFERENCES `user` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-CREATE TABLE `signature` (
-  `signature` varchar(255) NOT NULL,
-  `type` varchar(255) DEFAULT NULL,
-  `extended_type` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`signature`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-INSERT INTO user(email, username, passwd) VALUES('prueba@gmail.com', 'Prueba' ,sha2('prueba1234', 256));
-
-INSERT INTO device(id, dev_name, dev_type, last_scan, join_in, user) VALUES("ABC_1", "Windows - Prueba", "windows", NOW(), NOW(), "prueba@gmail.com");
-INSERT INTO device(id, dev_name, dev_type, last_scan, join_in, user) VALUES("ABC_2", "Android - Prueba", "android", NOW(), NOW(), "prueba@gmail.com");
-INSERT INTO device(id, dev_name, dev_type, last_scan, join_in, user) VALUES("ABC_3", "MacOS - Prueba", "macos", NOW(), NOW(), "prueba@gmail.com");
-INSERT INTO device(id, dev_name, dev_type, last_scan, join_in, user) VALUES("ABC_4", "Linux - Prueba", "linux", NOW(), NOW(), "prueba@gmail.com");
-INSERT INTO device(id, dev_name, dev_type, last_scan, join_in, user) VALUES("ABC_5", "iOS - Prueba", "ios", NOW(), NOW(), "prueba@gmail.com");
-
 INSERT INTO signature(signature, type, extended_type) VALUES (('00f538c3d410822e241486ca061a57ee', 'VIRUS', 'Win32/ASuspect.HHDYL!genus'),
 ('0955924ebc1876f0b849b3b9e45ed49d', 'WORM', 'W32.EloradoKQ.Worm'),
 ('01b656578e9f00f289d4c560fb8f2ff8', 'VIRUS', 'Win32/Zuten.JZ'),
@@ -1040,5 +1001,3 @@ INSERT INTO signature(signature, type, extended_type) VALUES (('00f538c3d410822e
 ('d501194c987486789bb01b50dc1a0adb', 'TRIAL', 'PruebaVirus'),
 ('f822102f4515609fc31927a84c6db7f8', 'TRIAL', 'PruebaVirus'),
 );
-INSERT INTO signature(signature, type, extended_type) VALUES ('0f5b5482e857019263360725ac7a51e6', 'TROJAN', 'W32.Clod003.Trojan.ca80');
-INSERT INTO signature(signature, type, extended_type) VALUES ('f822102f4515609fc31927a84c6db7f8', 'TRIAL', 'PruebaVirus');
