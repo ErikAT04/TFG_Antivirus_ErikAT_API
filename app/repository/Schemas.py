@@ -2,8 +2,8 @@ from pydantic import BaseModel
 from typing import Optional
 from datetime import datetime
 
-class Signature(BaseModel):
-    signature:str
+class Hash(BaseModel):
+    hash:str
     type:str
     extended_type:str
 

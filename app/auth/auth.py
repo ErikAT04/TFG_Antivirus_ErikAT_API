@@ -21,7 +21,7 @@ def create_token(data: dict):
     return token
 
 @router.post("/token")
-def login(form_data: OAuth2PasswordRequestForm, db:Session = Depends(get_db)):
+def login(form_data: OAuth2PasswordRequestForm = Depends(), db:Session = Depends(get_db)):
     pass_encoded = hashlib.sha256(form_data.password.encode()).hexdigest() # Se encripta la contraseña
     user = db.query(User).filter(and_(User.email == form_data.username, User.passwd == pass_encoded)).first()
     if user:
@@ -30,6 +30,8 @@ def login(form_data: OAuth2PasswordRequestForm, db:Session = Depends(get_db)):
             "access_token": token,
             "token_type":"bearer"
         }
+    else:
+        raise Exception("Credenciales incorrectas")
     
 @router.get("/getToken")
 def get_token(token:str = Depends(oauth2_scheme)):
