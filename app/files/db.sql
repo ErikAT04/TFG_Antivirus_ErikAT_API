@@ -1,7 +1,8 @@
-DROP DATABASE IF EXISTS m_antivirus_db;
-CREATE DATABASE m_antivirus_db;
-USE m_antivirus_db;
+USE freedb_PruebasAndroid;
 
+DROP TABLE IF EXISTS `signature`;
+DROP TABLE IF EXISTS `device`;
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `email` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
@@ -37,7 +38,7 @@ INSERT INTO device(id, dev_name, dev_type, last_scan, join_in, user) VALUES("ABC
 INSERT INTO device(id, dev_name, dev_type, last_scan, join_in, user) VALUES("ABC_4", "Linux - Prueba", "linux", NOW(), NOW(), "prueba@gmail.com");
 INSERT INTO device(id, dev_name, dev_type, last_scan, join_in, user) VALUES("ABC_5", "iOS - Prueba", "ios", NOW(), NOW(), "prueba@gmail.com");
 
-INSERT INTO signature(signature, type, extended_type) VALUES (('00f538c3d410822e241486ca061a57ee', 'VIRUS', 'Win32/ASuspect.HHDYL!genus'),
+INSERT INTO signature(signature, type, extended_type) VALUES ('00f538c3d410822e241486ca061a57ee', 'VIRUS', 'Win32/ASuspect.HHDYL!genus'),
 ('0955924ebc1876f0b849b3b9e45ed49d', 'WORM', 'W32.EloradoKQ.Worm'),
 ('01b656578e9f00f289d4c560fb8f2ff8', 'VIRUS', 'Win32/Zuten.JZ'),
 ('0615864d027b6f46731ee3bdcbe24edd', 'VIRUS', 'W32/Zbot.TH.gen!Eldorado'),
@@ -1036,9 +1037,5 @@ INSERT INTO signature(signature, type, extended_type) VALUES (('00f538c3d410822e
 ('0c8e23cef9baf33d3025d925636cf85c', 'TROJAN', 'Doc.Clod0c8.Trojan.e23c'),
 ('0e3e13292540b823c8cabfa7c326711f', 'TROJAN', 'W32.Clod3a0.Trojan.d8d9'),
 ('0a8b44bf42d642b9db5861fc3ab4317c', 'TROJAN', 'W32.Cloda88.Trojan.97a7'),
-('0f5b5482e857019263360725ac7a51e6', 'TROJAN', 'W32.Clod003.Trojan.ca80'),
-('d501194c987486789bb01b50dc1a0adb', 'TRIAL', 'PruebaVirus'),
-('f822102f4515609fc31927a84c6db7f8', 'TRIAL', 'PruebaVirus'),
-);
-INSERT INTO signature(signature, type, extended_type) VALUES ('0f5b5482e857019263360725ac7a51e6', 'TROJAN', 'W32.Clod003.Trojan.ca80');
-INSERT INTO signature(signature, type, extended_type) VALUES ('f822102f4515609fc31927a84c6db7f8', 'TRIAL', 'PruebaVirus');
+('0f5b5482e857019263360725ac7a51e6', 'TROJAN', 'W32.Clod003.Trojan.ca80');
+INSERT INTO signature(signature, type, extended_type) VALUES ('1e580212a3cc7b1df648d80eaa00e0e5', 'TRIAL', 'PruebaVirus');

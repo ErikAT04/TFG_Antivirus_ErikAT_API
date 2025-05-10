@@ -12,19 +12,18 @@ router = APIRouter(prefix="/api", tags=["Token Control"])
 
 oauth2_scheme = OAuth2PasswordBearer("/api/token")
 
-@router.post("/token") # /api/token
-def login(form_data: OAuth2PasswordRequestForm = Depends(), db:Session = Depends(get_db)):
-    [...]
 SECRET_KEY = "Clave_Magik_AV"
 ALGORITHM = "HS256"
 
+# Función de creación de tokens
 def create_token(data: dict):
     token = jwt.encode(data, SECRET_KEY, algorithm=ALGORITHM)
     return token
 
 @router.post("/token")
-def login(form_data: OAuth2PasswordRequestForm = Depends(), db:Session = Depends(get_db)):
-    user = db.query(User).filter(and_(User.email == form_data.username, User.passwd == hashlib.sha256(form_data.password.encode()).hexdigest())).first()
+def login(form_data: OAuth2PasswordRequestForm, db:Session = Depends(get_db)):
+    pass_encoded = hashlib.sha256(form_data.password.encode()).hexdigest() # Se encripta la contraseña
+    user = db.query(User).filter(and_(User.email == form_data.username, User.passwd == pass_encoded)).first()
     if user:
         token = create_token(data={"sub":user.email})
         return {
@@ -34,6 +33,4 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db:Session = Depends
     
 @router.get("/getToken")
 def get_token(token:str = Depends(oauth2_scheme)):
-    return token
-
-# https://www.youtube.com/watch?v=bYpaPxYgeJ0 
+    return token 

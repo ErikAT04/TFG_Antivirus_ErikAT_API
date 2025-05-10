@@ -39,8 +39,8 @@ class Device(Base):
 #   CONSTRAINT `device_ibfk_1` FOREIGN KEY (`user`) REFERENCES `user` (`email`)
 # ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-class Signature(Base):
-    __tablename__="signature"
-    signature = Column(VARCHAR(255), primary_key=True)
+class Hash(Base):
+    __tablename__="hash"
+    hash = Column(VARCHAR(255), primary_key=True)
     type = Column(VARCHAR(255))
     extended_type = Column(VARCHAR(255))
