@@ -1,6 +1,6 @@
 USE freedb_PruebasAndroid;
 
-DROP TABLE IF EXISTS `signature`;
+DROP TABLE IF EXISTS `hash`;
 DROP TABLE IF EXISTS `device`;
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -23,11 +23,11 @@ CREATE TABLE `device` (
   CONSTRAINT `device_ibfk_1` FOREIGN KEY (`user`) REFERENCES `user` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `signature` (
-  `signature` varchar(255) NOT NULL,
+CREATE TABLE `hash` (
+  `hash` varchar(255) NOT NULL,
   `type` varchar(255) DEFAULT NULL,
   `extended_type` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`signature`)
+  PRIMARY KEY (`hash`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 INSERT INTO user(email, username, passwd) VALUES('prueba@gmail.com', 'Prueba' ,sha2('prueba1234', 256));
@@ -38,7 +38,7 @@ INSERT INTO device(id, dev_name, dev_type, last_scan, join_in, user) VALUES("ABC
 INSERT INTO device(id, dev_name, dev_type, last_scan, join_in, user) VALUES("ABC_4", "Linux - Prueba", "linux", NOW(), NOW(), "prueba@gmail.com");
 INSERT INTO device(id, dev_name, dev_type, last_scan, join_in, user) VALUES("ABC_5", "iOS - Prueba", "ios", NOW(), NOW(), "prueba@gmail.com");
 
-INSERT INTO signature(signature, type, extended_type) VALUES ('00f538c3d410822e241486ca061a57ee', 'VIRUS', 'Win32/ASuspect.HHDYL!genus'),
+INSERT INTO hash(hash, type, extended_type) VALUES ('00f538c3d410822e241486ca061a57ee', 'VIRUS', 'Win32/ASuspect.HHDYL!genus'),
 ('0955924ebc1876f0b849b3b9e45ed49d', 'WORM', 'W32.EloradoKQ.Worm'),
 ('01b656578e9f00f289d4c560fb8f2ff8', 'VIRUS', 'Win32/Zuten.JZ'),
 ('0615864d027b6f46731ee3bdcbe24edd', 'VIRUS', 'W32/Zbot.TH.gen!Eldorado'),
@@ -1038,4 +1038,4 @@ INSERT INTO signature(signature, type, extended_type) VALUES ('00f538c3d410822e2
 ('0e3e13292540b823c8cabfa7c326711f', 'TROJAN', 'W32.Clod3a0.Trojan.d8d9'),
 ('0a8b44bf42d642b9db5861fc3ab4317c', 'TROJAN', 'W32.Cloda88.Trojan.97a7'),
 ('0f5b5482e857019263360725ac7a51e6', 'TROJAN', 'W32.Clod003.Trojan.ca80');
-INSERT INTO signature(signature, type, extended_type) VALUES ('1e580212a3cc7b1df648d80eaa00e0e5', 'TRIAL', 'PruebaVirus');
+INSERT INTO hash(hash, type, extended_type) VALUES ('1e580212a3cc7b1df648d80eaa00e0e5', 'TRIAL', 'PruebaVirus');
