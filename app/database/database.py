@@ -7,7 +7,7 @@ DBPASSWORD = "RR5xHVqx2J#uVN?"
 
 # URL de la BD
 SQLALCHEMY_DATABASE_URL = f"mysql+mysqlconnector://{DBUSER}:{DBPASSWORD}@sql.freedb.tech:3306/freedb_PruebasAndroid"
-# Motor de conexion de la bd
+# Motor de conexion Sde la bd
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 # Crea el generador de sesiones de la BD
 sessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
